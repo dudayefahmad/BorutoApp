@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.ahmaddudayef.borutoapp.R
 import com.ahmaddudayef.borutoapp.navigation.Screen
@@ -56,32 +55,22 @@ fun SplashScreen(
 
 @Composable
 fun Splash(degrees: Float) {
-    if (isSystemInDarkTheme()) {
-        Box(
-            modifier = Modifier
-                .background(Color.Black)
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                modifier = Modifier.rotate(degrees = degrees),
-                painter = painterResource(id = R.drawable.ic_logo),
-                contentDescription = stringResource(R.string.app_logo)
-            )
-        }
-    } else {
-        Box(
-            modifier = Modifier
-                .background(Brush.verticalGradient(listOf(Purple500, Purple200)))
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Image(
-                modifier = Modifier.rotate(degrees = degrees),
-                painter = painterResource(id = R.drawable.ic_logo),
-                contentDescription = stringResource(R.string.app_logo)
-            )
-        }
+    val modifier =
+        if (isSystemInDarkTheme())
+            Modifier.background(Color.Black)
+        else
+            Modifier.background(Brush.verticalGradient(listOf(Purple500, Purple200))
+        )
+    Box(
+        modifier = modifier
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Image(
+            modifier = Modifier.rotate(degrees = degrees),
+            painter = painterResource(id = R.drawable.ic_logo),
+            contentDescription = stringResource(R.string.app_logo)
+        )
     }
 }
 
